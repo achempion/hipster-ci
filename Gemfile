@@ -8,3 +8,11 @@ gem 'haml'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
+
+gem 'font-awesome-rails'
+
+group :test do
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'capybara', github: 'jnicklas/capybara'
+end

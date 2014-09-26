@@ -1,0 +1,9 @@
+.project-item
+  .right
+    .project-item-actions
+      = link_to project_path(project), method: :delete, class: 'badge' do
+        %i.fa.fa-trash
+    .project-item-info
+      %span.color-gray-30 GitHub
+  = project.path
+%hr

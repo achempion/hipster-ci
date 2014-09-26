@@ -1,0 +1,4 @@
+= form_for Project.new, html: {class: 'forms forms-inline'} do |f|
+  %label
+    = f.text_field :path, placeholder: 'achempion/hipster-ci'#, class: 'width-50'
+  = f.submit 'Create', class: 'btn'
