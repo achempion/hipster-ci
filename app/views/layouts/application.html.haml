@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %title HipsterCi
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    .page-wrapper
+      .units-row
+        .unit-centered.page
+          .page-content
+            = yield
+          .page-nav
+            .nav.nav-stacked
+              %ul
+                %li
+                  = link_to_unless params[:controller]=='projects', 'Projects', projects_path do
+                    %span Projects
+                %li
+                  = link_to_unless params[:controller]=='builds', 'Builds', root_path do
+                    %span Builds
