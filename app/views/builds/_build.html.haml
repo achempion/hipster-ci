@@ -1,5 +1,9 @@
-= build.project.path
+.label.label-outline= build.sha[0..6]
 .right
-   = build_status build
-   .label.label-outline= build.sha[0..6]
+  = build_status build
 %hr
+%code.build-item-result.width-100
+  %nobr= raw build.result.to_s.gsub(/\n/, '<br/>')
+%br
+%br
+%br
