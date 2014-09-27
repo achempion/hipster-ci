@@ -3,22 +3,26 @@ require 'rails_helper'
 describe 'projects' do
 
   before do
-    visit root_path
+    create_project('repo/project1', 'secret')
+    create_project('repo/project2', 'secret')
 
-    within '#new_project' do
-      fill_in 'achempion/hipster-ci', with: 'project/path'
-
-      click_button 'Create'
-    end
+    visit projects_path
   end
 
   context 'displayed' do
-    it { expect(page).to have_content('project/path') }
+    it do
+      expect(page).to have_content('repo/project1')
+      expect(page).to have_content('repo/project2')
+    end
   end
 
-  context 'removeed' do
-    before { find('.project-item-actions a.badge', visible: false).click }
+  context 'remove one' do
+    let(:project2) { Project.find_by!(path: 'repo/project2') }
 
-    it { expect(page).to_not have_content('project/path') }
+    before do
+      find("a[href='/projects/#{project2.id}'][data-method='delete']").click
+    end
+
+    it { expect(page).to_not have_content('repo/project2') }
   end
 end

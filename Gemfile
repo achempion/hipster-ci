@@ -11,6 +11,10 @@ gem 'jquery-rails'
 
 gem 'font-awesome-rails'
 
+gem 'octokit', '~> 3.0' # GitHub api
+
+gem 'priscilla' # print in console
+
 group :test do
   gem 'rspec-rails'
   gem 'database_cleaner'

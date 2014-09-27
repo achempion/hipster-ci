@@ -18,5 +18,5 @@
                   = link_to_unless params[:controller]=='projects', 'Projects', projects_path do
                     %span Projects
                 %li
-                  = link_to_unless params[:controller]=='builds', 'Builds', root_path do
+                  = link_to_unless params[:controller]=='builds', 'Builds', builds_path do
                     %span Builds
