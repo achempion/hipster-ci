@@ -1,4 +1,5 @@
 .label.label-outline= build.sha[0..6]
+= build.project.path if @project.nil?
 .right
   = build_status build
 %hr
