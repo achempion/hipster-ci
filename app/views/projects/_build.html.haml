@@ -1,4 +1,5 @@
 .label.label-outline= build.sha[0..6]
 .right
-   .label= build.status
+   = build_status build
 %hr
+%code.width-100= raw build.result.to_s.gsub(/\n/, '<br/>')
