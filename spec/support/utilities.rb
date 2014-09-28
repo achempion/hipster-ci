@@ -9,4 +9,6 @@ def create_project path, token, sha = 'sha'
 
     click_button 'Create'
   end
+
+  Project.find_by!(path: path)
 end

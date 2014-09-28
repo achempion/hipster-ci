@@ -46,6 +46,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.1)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.2.0.0)
@@ -149,6 +154,7 @@ PLATFORMS
 DEPENDENCIES
   capybara!
   database_cleaner
+  factory_girl_rails
   font-awesome-rails
   haml
   jquery-rails
