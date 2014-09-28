@@ -1,7 +1,7 @@
 class BuildsController < ApplicationController
 
   def index
-    @builds = Build.includes(:project).order(id: :desc)
+    @builds = Build.includes(:project).order(updated_at: :desc)
   end
 
   def restart
