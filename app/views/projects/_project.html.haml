@@ -4,6 +4,7 @@
       = link_to project_path(project), method: :delete, class: 'badge' do
         %i.fa.fa-trash
     .project-item-info
+      = build_status(project.last_build)
       %span.color-gray-30 GitHub
   = link_to project.path, project_path(project)
 %hr

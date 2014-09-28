@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @builds = @project.builds.order(updated_at: :desc)
   end
 
   def destroy

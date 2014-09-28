@@ -5,6 +5,8 @@
 %hr
 %code.build-item-result.width-100
   %nobr= raw build.result.to_s.gsub(/\n/, '<br/>')
+- if build.fail? || build.success?
+  .right= link_to 'restart', restart_build_path(build), method: :post, class: 'btn btn-smaller'
 %br
 %br
 %br
