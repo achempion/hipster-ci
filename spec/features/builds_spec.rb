@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'builds' do
 
   before do
-    create_project('repo/project1', 'secret', 'last-sha')
+    @project = create_project('repo/project1', 'secret', 'last-sha')
 
     visit projects_path
   end
@@ -13,6 +13,10 @@ describe 'builds' do
 
     context 'sha of last commit are displayed' do
       it { expect(page).to have_content('last-sh') }
+    end
+
+    context 'have a link to project' do
+      it { expect(page).to have_selector("a[href='#{project_path(@project)}']") }
     end
   end
 
@@ -25,6 +29,10 @@ describe 'builds' do
 
     context 'sha of last commit are displayed' do
       it { expect(page).to have_content('last-sh') }
+    end
+
+    context 'don\'t have a link to project' do
+      it { expect(page).to_not have_selector("a[href='#{project_path(@project)}']") }
     end
   end
 end
