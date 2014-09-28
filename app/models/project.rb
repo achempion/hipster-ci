@@ -4,4 +4,8 @@ class Project < ActiveRecord::Base
   def last_build
     builds.order(id: :desc).limit(1).first
   end
+
+  def access_token
+    super.present? ? super : Rails.configuration.default_project_access_token
+  end
 end

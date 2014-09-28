@@ -28,5 +28,7 @@ module HipsterCi
     # config.i18n.default_locale = :de
 
     config.autoload_paths << 'lib/'
+
+    config.default_project_access_token = ENV['DEFAULT_PROJECT_ACCESS_TOKEN']
   end
 end
