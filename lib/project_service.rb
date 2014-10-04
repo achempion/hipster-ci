@@ -12,20 +12,6 @@ class ProjectService
   end
 
   def last_commit
-    commits.first
-  end
-
-  private
-
-  def client
-    Octokit::Client.new(access_token: @project_params[:access_token])
-  end
-
-  def repository
-    client.repo(@project_params[:path])
-  end
-
-  def commits
-    repository.rels[:commits].get.data
+    GithubService.new(@project_params[:project_path], @project_params[:access_token]).last_commit
   end
 end

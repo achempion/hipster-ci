@@ -23,23 +23,24 @@ namespace :scheduler do
             system "cd builds/#{build.id} && bundle >> bundle_result"
           end
 
-        if bundle_status
-          spec_status =
-              Bundler.with_clean_env do
-                system "cd builds/#{build.id} && bundle exec rspec >> spec_result"
-              end
+        build.result = `cd builds/#{build.id} && cat bundle_result`
 
-          build.result = `cd builds/#{build.id} && cat spec_result`
+        (build.fail! and next) unless bundle_status
 
-          if spec_status && build.result.include?('0 failures')
-            build.success!
-          else
-            build.fail!
+        spec_status =
+          Bundler.with_clean_env do
+            system "cd builds/#{build.id} && bundle exec rspec >> spec_result"
           end
+
+        build.result = `cd builds/#{build.id} && cat spec_result`
+
+        if spec_status && build.result.include?('0 failures')
+          build.success!
         else
-          build.result = `cd builds/#{build.id} && cat bundle_result`
           build.fail!
         end
+
+        GithubService.for_project(build.project).create_comment(build.sha, "**#{build.status.humanize.upcase}**\n```\n#{build.result}\n```")
       end
 
       sleep 5
