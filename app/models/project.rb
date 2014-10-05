@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   has_many :builds, dependent: :destroy
 
-  validates_presence_of :path
+  validates :path, presence: true, uniqueness: true
 
   def last_build
     builds.order(id: :desc).limit(1).first
