@@ -18,6 +18,9 @@ namespace :scheduler do
           git checkout #{build.sha}
         `
 
+        `rm builds/#{build.id}/config/database.yml`
+        `cp config/build_database.yml builds/#{build.id}/config/database.yml`
+
         bundle_status =
           Bundler.with_clean_env do
             system "cd builds/#{build.id} && bundle >> bundle_result"
