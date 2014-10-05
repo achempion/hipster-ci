@@ -35,4 +35,6 @@ describe 'projects' do
       it { expect { visit projects_path }.to_not raise_error }
     end
   end
+
+  it 'validation specs'
 end

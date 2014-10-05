@@ -1,4 +1,6 @@
 class GithubService
+  class Error < StandardError; end
+
   def initialize project_path, access_token
     @project_path = project_path
     @client = Octokit::Client.new(access_token: access_token)
@@ -19,6 +21,8 @@ class GithubService
   private
 
   def commits
-    @client.repo(@project_path).rels[:commits].get.data
+    list = @client.repo(@project_path).rels[:commits].try(:get).try(:data)
+
+    list ? list : (raise Error, 'Commit feed not available')
   end
 end

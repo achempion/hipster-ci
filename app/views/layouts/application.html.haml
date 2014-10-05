@@ -10,6 +10,9 @@
       .units-row
         .unit-centered.page
           .page-content
+            - if flash[:errors].is_a?(Array)
+              - flash[:errors].each do |message|
+                .tools-alert.tools-alert-red= message
             = yield
           .page-nav
             .nav.nav-stacked

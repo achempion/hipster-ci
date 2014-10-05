@@ -5,7 +5,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    ProjectService.new(project_params).create
+    project = ProjectService.new(project_params)
+
+    flash[:errors] = project.errors_list unless project.save
 
     redirect_to projects_path
   end

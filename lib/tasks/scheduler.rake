@@ -40,7 +40,12 @@ namespace :scheduler do
           build.fail!
         end
 
-        GithubService.for_project(build.project).create_comment(build.sha, "**#{build.status.humanize.upcase}**\n```\n#{build.result}\n```")
+        begin
+          GithubService.for_project(build.project).create_comment(build.sha, "**#{build.status.humanize.upcase}**\n```\n#{build.result}\n```")
+        rescue Octokit::Error => e
+          build.result += "\n\nGITHUB EXCEPTION:\n#{e.message}"
+          build.save
+        end
       end
 
       sleep 5
