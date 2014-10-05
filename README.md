@@ -23,4 +23,6 @@
   
 ### Running
 
-  It's all, just `bundle` and `rake db:migrate` and then `rails s -e production`
+  It's all, just `bundle` and `rake db:migrate` and then `rails s -e production &`
+  
+  Don't forget run your spec daemon with `rake scheduler:perform &`
