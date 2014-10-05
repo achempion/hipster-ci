@@ -27,10 +27,13 @@
 
   With production environment
   
-  - `$ bundle`
-  - `$ rake db:migrate`
-  - `$ rails s -p 80 &`
-  - `$ rake scheduler:perform &`
+  ```
+  $ bundle
+  $ rake db:migrate
+  $ rake assets:precompile
+  $ rails s -p 80 &
+  $ rake scheduler:perform &
+  ```
   
   At this step you can add first project, after this let's configure github webhooks
 
