@@ -50,11 +50,7 @@
   
   `http://admin:secret@example.com/triggers/github`
   
-  
-
-  It's all, just `bundle` and `rake db:migrate` and then `rails s -e production &`
-  
-  Don't forget run your spec daemon with `rake scheduler:perform &`
+  That's all
 
 ### License
 
