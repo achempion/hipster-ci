@@ -27,10 +27,10 @@
 
   With production environment
   
-  - bundle
-  - rake db:migrate
-  - rails s -p 80 &
-  - rake scheduler:perform &
+  - `$ bundle`
+  - `$ rake db:migrate`
+  - `$ rails s -p 80 &`
+  - `$ rake scheduler:perform &`
   
   At this step you can add first project, after this let's configure github webhooks
 
@@ -40,8 +40,11 @@
   - click Add Webhooh
   
   **Payload URL**
+
   `http://[login_from_production.rb]:[password_from_production.rb]@[your_webserver_address.com]/triggers/github`
+  
   example:
+  
   `http://admin:secret@example.com/triggers/github`
   
   
