@@ -25,6 +25,27 @@
   
 ### Running
 
+  With production environment
+  
+  - bundle
+  - rake db:migrate
+  - rails s -p 80 &
+  - rake scheduler:perform &
+  
+  At this step you can add first project, after this let's configure github webhooks
+
+  - Go to your project page at github.com
+  - Settins > Webhooks & Services > Add webhook
+  - enter Payload URL
+  - click Add Webhooh
+  
+  **Payload URL**
+  `http://[login_from_production.rb]:[password_from_production.rb]@[your_webserver_address.com]/triggers/github`
+  example:
+  `http://admin:secret@example.com/triggers/github`
+  
+  
+
   It's all, just `bundle` and `rake db:migrate` and then `rails s -e production &`
   
   Don't forget run your spec daemon with `rake scheduler:perform &`
