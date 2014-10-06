@@ -23,7 +23,7 @@ namespace :scheduler do
 
         bundle_status =
           Bundler.with_clean_env do
-            system "cd builds/#{build.id} && bundle >> bundle_result"
+            system "cd builds/#{build.id} && bundle > bundle_result 2>&1"
           end
 
         build.result = `cd builds/#{build.id} && cat bundle_result`
@@ -32,7 +32,7 @@ namespace :scheduler do
 
         spec_status =
           Bundler.with_clean_env do
-            system "cd builds/#{build.id} && RAILS_ENV=test bundle exec rspec >> spec_result"
+            system "cd builds/#{build.id} && RAILS_ENV=test bundle exec rspec > spec_result 2>&1"
           end
 
         build.result = `cd builds/#{build.id} && cat spec_result`
