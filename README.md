@@ -40,7 +40,7 @@
   - Go to your project page at github.com
   - Settins > Webhooks & Services > Add webhook
   - enter Payload URL
-  - click Add Webhooh
+  - click Add Webhook
   
   **Payload URL**
 
