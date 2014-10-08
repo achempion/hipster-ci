@@ -7,14 +7,18 @@ describe 'Github' do
 
     describe 'push event' do
       context 'with valid request' do
+        let(:commit_params) do
+          {repository: {full_name: 'my/project'}, head_commit: {id: 'sha-of-commit', message: 'my commit'}}
+        end
         before do
-          post '/triggers/github', {repository: {full_name: 'my/project'}, head_commit: {id: 'sha-of-commit'}}, {'X-GitHub-Event' => 'push'}
+          post '/triggers/github', commit_params, {'X-GitHub-Event' => 'push'}
         end
 
         it do
           expect(response.status).to eq(200)
 
           expect(project.builds.first.sha).to eq('sha-of-commit')
+          expect(project.builds.first.message).to eq('my commit')
         end
       end
 

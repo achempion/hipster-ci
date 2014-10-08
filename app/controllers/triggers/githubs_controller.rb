@@ -3,7 +3,7 @@ class Triggers::GithubsController < Triggers::BaseController
   before_action :check_event, :check_project
 
   def create
-    @project.builds.create(sha: github_params[:head_commit][:id])
+    @project.builds.create(sha: github_params[:head_commit][:id], message: github_params[:head_commit][:message])
 
     head :ok
   end
@@ -11,7 +11,7 @@ class Triggers::GithubsController < Triggers::BaseController
   private
 
   def github_params
-    params.permit(head_commit: :id, repository: :full_name)
+    params.permit(head_commit: [:id, :message], repository: :full_name)
   end
 
   def check_event
