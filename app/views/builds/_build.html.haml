@@ -1,5 +1,6 @@
 .label.label-outline= build.sha[0..6]
 = link_to build.project.path, project_path(build.project) if @project.nil?
+= truncate build.message
 .right
   = build_status build
 %hr
