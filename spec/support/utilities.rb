@@ -1,5 +1,11 @@
-def create_project path, token, sha = 'sha'
-  allow_any_instance_of(ProjectService).to receive(:last_commit).and_return(double(sha: sha))
+def create_project path, token, build_options={sha: 'sha', message: 'message'}
+  allow_any_instance_of(ProjectService).to \
+    receive(:last_commit).and_return(
+      double(
+        sha: build_options[:sha],
+        commit: double(message: build_options[:message])
+      )
+    )
 
   visit root_path
 

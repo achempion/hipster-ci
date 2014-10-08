@@ -15,7 +15,7 @@ class ProjectService
     ActiveRecord::Base.transaction do
       @project.save
 
-      @project.builds.create(sha: last_commit.sha)
+      @project.builds.create(sha: last_commit.sha, message: last_commit.commit.message)
     end
   end
 

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'builds' do
 
   before do
-    @project = create_project('repo/project1', 'secret', 'last-sha')
+    @project = create_project('repo/project1', 'secret', {sha:'last-sha', message: 'first commit'})
 
     visit projects_path
   end
@@ -17,6 +17,10 @@ describe 'builds' do
 
     context 'have a link to project' do
       it { expect(page).to have_selector("a[href='#{project_path(@project)}']") }
+    end
+
+    context 'display commit message' do
+      it { expect(page).to have_content('first commit') }
     end
   end
 
@@ -33,6 +37,10 @@ describe 'builds' do
 
     context 'don\'t have a link to project' do
       it { expect(page).to_not have_selector("a[href='#{project_path(@project)}']") }
+    end
+
+    context 'display commit message' do
+      it { expect(page).to have_content('first commit') }
     end
   end
 end
