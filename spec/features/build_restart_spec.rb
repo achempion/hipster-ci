@@ -36,7 +36,7 @@ describe 'restart build' do
 
       visit builds_path
 
-      click_link('restart')
+      find('.build-item_refresh').click
     end
 
     context 'ready to start again' do
