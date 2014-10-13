@@ -21,7 +21,11 @@ class GithubService
   private
 
   def commits
-    list = @client.repo(@project_path).rels[:commits].try(:get).try(:data)
+    begin
+      list = @client.repo(@project_path).rels[:commits].try(:get).try(:data)
+    rescue Faraday::ConnectionFailed
+      raise Error, 'Github service not available'
+    end
 
     list ? list : (raise Error, 'Commit feed not available')
   end

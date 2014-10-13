@@ -15,6 +15,10 @@ html
           | Hipster Ci
       .base-page_content
         .base-page_content_body
+          - if flash[:errors].is_a?(Array)
+            .base-page_content_body_errors
+              - flash[:errors].each do |message|
+                div= message
           = yield
         .base-page_content_menu
           ul
@@ -22,6 +26,3 @@ html
               = link_to 'Projects', projects_path
             li
               = link_to 'Builds', builds_path
-        - if flash[:errors].is_a?(Array)
-          - flash[:errors].each do |message|
-            = message

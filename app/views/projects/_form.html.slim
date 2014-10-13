@@ -1,6 +1,6 @@
-= form_for Project.new, html: {class: 'forms forms-inline'} do |f|
-  %label
+= form_for Project.new do |f|
+  label
     = f.text_field :path, placeholder: 'achempion/hipster-ci'
-  %label
+  label
     = f.text_field :access_token, placeholder: 'access token'
   = f.submit 'Create', class: 'btn'
