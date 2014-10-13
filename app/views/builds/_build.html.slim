@@ -1,0 +1,30 @@
+.build-item
+  .build-item_right
+    - if build.ready_to_restart?
+      = link_to restart_build_path(build), method: :post, class: 'build-item_refresh' do
+        i.fa.fa-refresh
+    - if build.in_progress?
+      span.build-item_in-process
+        i.fa.fa-circle-o-notch
+    = build_status(build)
+  /span.project-item_title= link_to build.project.path, project_path(build.project)
+  = link_to build_path(build.id), class: 'build-item_sha' do
+    = build.sha[0..6]
+  span.build-item_message= truncate build.message, length: 90
+  - if params[:controller] == 'builds' && params[:action] == 'index'
+    .build-item_project= link_to build.project.path, project_path(build.project)
+
+      /
+/.label.label-outline= build.sha[0..6]
+/= link_to build.project.path, project_path(build.project) if @project.nil?
+/= truncate build.message
+/.right
+/  = build_status build
+/%hr
+/%code.build-item-result.width-100
+/  %nobr= raw build.result.to_s.gsub(/\n/, '<br/>')
+/- if build.fail? || build.success?
+/  .right= link_to 'restart', restart_build_path(build), method: :post, class: 'btn btn-smaller'
+/%br
+/%br
+/%br

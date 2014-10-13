@@ -1,0 +1,9 @@
+.build-page
+  .build-page_project
+    | &larr;
+    = link_to @build.project.path, project_path(@build.project)
+  .build-page_build
+    = render @build
+  .build-page_build-info
+    code
+      nobr= raw @build.result.to_s.gsub(/\n/, '<br/>')
