@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title HipsterCi
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    link href='http://fonts.googleapis.com/css?family=Lobster&text=HipsterCi' rel='stylesheet' type='text/css'
+    = csrf_meta_tags
+  body
+    .base-page
+      .base-page_header
+        .base-page_header_logo
+          = link_to root_path do
+            i.fa.fa-paper-plane-o.fa-3
+          | Hipster Ci
+      .base-page_content
+        .base-page_content_body
+          = yield
+        .base-page_content_menu
+          ul
+            li
+              = link_to 'Projects', projects_path
+            li
+              = link_to 'Builds', builds_path
+        - if flash[:errors].is_a?(Array)
+          - flash[:errors].each do |message|
+            = message
