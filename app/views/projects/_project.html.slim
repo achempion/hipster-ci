@@ -1,0 +1,11 @@
+.project-item
+  .project-item_right
+    = build_status(project.last_build) unless project.last_build.nil?
+    = link_to project_path(project), method: :delete, class: 'project-item_remove' do
+      i.fa.fa-trash
+  span.project-item_title= link_to project.path, project_path(project)
+  - if project.last_build.present?
+    span.project-item_message= truncate project.last_build.message
+
+
+
