@@ -1,3 +1,6 @@
-%h1= @project.path
-%p.lead Builds
-= render @builds
+.project-page
+  .project-page_title= @project.path
+  .project-page_builds
+    .project-page_builds_title Builds
+    .project-page_builds_list
+      = render @builds

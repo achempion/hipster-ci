@@ -4,6 +4,10 @@ class BuildsController < ApplicationController
     @builds = Build.includes(:project).order(updated_at: :desc)
   end
 
+  def show
+    @build = Build.find(params[:id])
+  end
+
   def restart
     build = Build.find(params[:id])
 

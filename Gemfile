@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.4'
+gem 'rails', '~> 4.1'
 gem 'sqlite3'
 
 gem 'evil-front-rails'
 gem 'haml' # todo: remove
+gem 'jquery-rails'
 
 gem 'font-awesome-rails'
 

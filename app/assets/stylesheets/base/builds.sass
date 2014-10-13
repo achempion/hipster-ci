@@ -12,3 +12,35 @@
   background: #ffc800
 .build-label-green, .build-label-red
   color: white
+
+.build-item
+  padding: 15px 0
+  border-bottom: 2px dotted black(0.2)
+.build-item_right
+  float: right
+.build-item_refresh
+  margin-right: 8px
+  i
+    transition: transform 200ms
+    &:hover
+      transform:  rotate(90deg)
+.build-item_in-process
+  margin-right: 8px
+  i
+    animation: rotation 1s infinite linear
+    width: 16px
+    height: 15px
+@-webkit-keyframes rotation
+  from
+    -webkit-transform: rotate(0deg)
+  to
+    -webkit-transform: rotate(359deg)
+
+.build-item_remove
+  margin-left: 8px
+.build-item_message
+  font-style: italic
+.build-item_title
+  margin-right: 12px
+.build-item_sha
+  margin-right: 8px
