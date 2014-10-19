@@ -3,9 +3,6 @@
     - if build.ready_to_restart?
       = link_to restart_build_path(build), method: :post, class: 'build-item_refresh' do
         i.fa.fa-refresh
-    - if build.in_progress?
-      span.build-item_in-process
-        i.fa.fa-circle-o-notch.fa-spin
     = build_status(build)
   /span.project-item_title= link_to build.project.path, project_path(build.project)
   = link_to build_path(build.id), class: 'build-item_sha' do
