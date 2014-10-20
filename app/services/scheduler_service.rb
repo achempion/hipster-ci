@@ -59,14 +59,21 @@ class SchedulerService
     end
 
     def run_specs
+      spec_command =
+        if File.directory?("builds/#{@build.id}/spec")
+          'rspec'
+        else
+          'rake'
+        end
+
       spec_status =
         Bundler.with_clean_env do
-          system "cd builds/#{@build.id} && RAILS_ENV=test bundle exec rspec > spec_result 2>&1"
+          system "cd builds/#{@build.id} && RAILS_ENV=test bundle exec #{spec_command} > spec_result 2>&1"
         end
 
       @result = `cd builds/#{@build.id} && cat spec_result`
 
-      spec_status && @result.include?('0 failures')
+      spec_status
     end
 
     def write_comment!
