@@ -12,10 +12,10 @@ gem 'octokit', '~> 3.0' # GitHub api
 
 group :development, :test do
   gem 'priscilla' # print in console
+  gem 'rspec-rails'
 end
 
 group :test do
-  gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'factory_girl_rails'
