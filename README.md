@@ -1,11 +1,10 @@
 ## Hipster CI
 
-*this project only works with rspec without any options (or libs like xvfb-run) but it's  will be released coming soon*
-
 ### What this project do
 
-  - provide web interface with your projects, builds (each commit is a build) and result of specs
-  - write comment on github commit page with result of runned specs
+  - provide web interface with your projects, builds (each commit is a build) and result of tests
+  - run project's tests
+  - write comment on github commit page with result of runned tests
 
 ### About permissions
 
