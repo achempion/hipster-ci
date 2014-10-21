@@ -12,7 +12,7 @@ describe SchedulerService::BuildRunner do
         expect(runner).to receive(:prepare_gems).and_return(true)
         expect(runner).to receive(:run_specs).and_return(true)
 
-        expect(runner).to receive(:write_comment!)
+        expect(runner).to receive(:notificate!)
 
         runner.process
       end
@@ -26,7 +26,7 @@ describe SchedulerService::BuildRunner do
         expect(runner).to_not receive(:prepare_gems)
         expect(runner).to_not receive(:run_specs)
 
-        expect(runner).to receive(:write_comment!)
+        expect(runner).to receive(:notificate!)
 
         runner.process
       end

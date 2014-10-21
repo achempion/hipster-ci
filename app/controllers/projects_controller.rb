@@ -17,6 +17,23 @@ class ProjectsController < ApplicationController
     @builds = @project.builds.order(updated_at: :desc)
   end
 
+  def update
+    @project = Project.find(params[:id])
+
+    notifications = params[:project].try(:[], :notifications)
+    available_notifications = Project.values_for_notifications.map { |name| name.to_s }
+
+    if notifications.is_a?(Array)
+      @project.update(
+        notifications: notifications.select { |notification| available_notifications.include?(notification) }.compact
+      )
+    else
+      @project.update(notifications: nil)
+    end
+
+    redirect_to project_path(@project)
+  end
+
   def destroy
     Project.find(params[:id]).destroy
 

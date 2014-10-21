@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   root to: 'projects#index'
 
-  resources :projects, only: [:index, :create, :destroy, :show]
+  resources :projects, only: [:index, :create, :destroy, :show, :update]
   resources :builds, only: [:index, :show] do
     member { post 'restart' }
   end

@@ -1,6 +1,8 @@
 class Project < ActiveRecord::Base
   has_many :builds, dependent: :destroy
 
+  bitmask :notifications, as: [:github]
+
   validates :path, presence: true, uniqueness: true
 
   def last_build

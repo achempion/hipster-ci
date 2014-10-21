@@ -27,7 +27,7 @@ class SchedulerService
         @build.fail!
       end
 
-      write_comment!
+      notificate!
     end
 
     private
@@ -76,12 +76,14 @@ class SchedulerService
       spec_status
     end
 
-    def write_comment!
-      begin
-        GithubService.for_project(@build.project).create_comment(@build.sha, "**#{@build.status.humanize.upcase}**\n```\n#{@build.result}\n```")
-      rescue Octokit::Error => e
-        @build.result += "\n\nGITHUB EXCEPTION:\n#{e.message}"
-        @build.save
+    def notificate!
+      if @build.project.notifications?(:github)
+        begin
+          GithubService.for_project(@build.project).create_comment(@build.sha, "**#{@build.status.humanize.upcase}**\n```\n#{@build.result}\n```")
+        rescue Octokit::Error => e
+          @build.result += "\n\nGITHUB EXCEPTION:\n#{e.message}"
+          @build.save
+        end
       end
     end
   end

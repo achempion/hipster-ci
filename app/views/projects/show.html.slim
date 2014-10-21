@@ -1,5 +1,13 @@
 .project-page
+  .project-page_settings
+    .project-page_settings_header Notifications
+    = form_for @project do |f|
+      label
+        = check_box_tag 'project[notifications][]', 'github', @project.notifications?(:github)
+        | GitHub
+      div= f.submit 'Save'
   .project-page_title= @project.path
+  .clearfix
   .project-page_builds
     .project-page_builds_title Builds
     .project-page_builds_list
