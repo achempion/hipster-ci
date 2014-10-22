@@ -16,11 +16,18 @@ module SchedulerService
 
     def initialize build_folder
       @build_folder = build_folder
-      @configuration = YAML.load_file build_folder.join('config', 'hipster_ci.yml')
+
+      configuration_file = build_folder.join('config', 'hipster_ci.yml')
+      @configuration =
+        if configuration_file.exist?
+          YAML.load_file(build_folder.join('config', 'hipster_ci.yml')).with_indifferent_access
+        else
+          {}
+        end
     end
 
     def requirements
-      @configuration[:requirements]
+      @configuration[:requirements] || []
     end
 
     def spec_command
