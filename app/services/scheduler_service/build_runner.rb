@@ -10,7 +10,7 @@ module SchedulerService
 
       @result = ''
 
-      okay = prepare_files && prepare_gems && run_specs
+      okay = prepare_libs && prepare_files && prepare_gems && run_specs
 
       @build.result = @result
 
@@ -31,6 +31,17 @@ module SchedulerService
 
     def build_configuration
       @build_configuration ||= BuildConfiguration.new(build_folder)
+    end
+
+    def prepare_libs
+      return true if build_configuration.requirements.empty?
+
+      apt_get_status =
+        system "cd #{build_folder} && apt-get install #{build_configuration.requirements.join(' ')} > apt_get_result 2>&1"
+
+      @result = File.read build_folder.join('apt_get_result')
+
+      apt_get_status
     end
 
     def prepare_files
