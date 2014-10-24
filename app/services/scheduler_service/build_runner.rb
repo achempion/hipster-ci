@@ -26,7 +26,7 @@ module SchedulerService
     private
 
     def build_folder
-      Rails.root.join('builds', @build.id)
+      Rails.root.join('builds', @build.id.to_s)
     end
 
     def build_configuration
