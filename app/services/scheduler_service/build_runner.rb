@@ -10,7 +10,7 @@ module SchedulerService
 
       @result = ''
 
-      okay = prepare_libs && prepare_files && prepare_gems && run_specs
+      okay = prepare_files && prepare_libs && prepare_gems && run_specs
 
       @build.result = @result
 
