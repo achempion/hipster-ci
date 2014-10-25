@@ -36,8 +36,9 @@ module SchedulerService
     def prepare_libs
       return true if build_configuration.requirements.empty?
 
+      # todo: sudo is a bad idea
       apt_get_status =
-        system "cd #{build_folder} && apt-get install #{build_configuration.requirements.join(' ')} > apt_get_result 2>&1"
+        system "cd #{build_folder} && sudo apt-get --yes --force-yes install #{build_configuration.requirements.join(' ')} > apt_get_result 2>&1"
 
       @result = File.read build_folder.join('apt_get_result')
 
