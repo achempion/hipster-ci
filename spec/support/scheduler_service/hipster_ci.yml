@@ -1,0 +1,6 @@
+requirements:
+  - xfvb
+  - curl
+  - mysql-server
+
+spec_command: xvfb-run rspec
