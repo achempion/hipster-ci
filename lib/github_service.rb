@@ -25,6 +25,8 @@ class GithubService
       list = @client.repo(@project_path).rels[:commits].try(:get).try(:data)
     rescue Faraday::ConnectionFailed
       raise Error, 'Github service not available'
+    rescue Octokit::NotFound
+      raise Error, 'Github repository not detected'
     end
 
     list ? list : (raise Error, 'Commit feed not available')
