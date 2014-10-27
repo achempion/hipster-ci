@@ -50,6 +50,20 @@
   `http://admin:secret@example.com/triggers/github`
   
   That's all
+  
+### How to run project tests with any other command or define system requirements
+
+  For example: You add a project to Hipster CI and project has a requirements, like mysqlclient-dev or imagemagic or something else
+  
+  Just create a configuration file at `config / hipster_ci.yml`, with content like 
+  
+  ```yaml
+    requirements:
+      - xfvb
+      - curl
+
+    spec_command: xvfb-run rspec
+  ```
 
 ### License
 
