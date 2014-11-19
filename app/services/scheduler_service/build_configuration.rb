@@ -34,6 +34,16 @@ module SchedulerService
       @configuration[:spec_command] || default_spec_command
     end
 
+    def database
+      adapter = @configuration[:database] || 'sqlite'
+
+      if %w(sqlite mysql).include?(adapter)
+        adapter
+      else
+        raise BuildConfigurationError, "Can't use #{adapter} as custom database"
+      end
+    end
+
     def test_environment
       'test'
     end
@@ -47,6 +57,8 @@ module SchedulerService
         'rake'
       end
     end
+
+    class BuildConfigurationError < StandardError; end
 
   end
 end

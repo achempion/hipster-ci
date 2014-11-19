@@ -25,6 +25,18 @@ describe SchedulerService::BuildConfiguration do
       it { expect(configuration.spec_command).to eq('xvfb-run rspec') }
     end
 
+    describe '#database' do
+      context 'allowed database' do
+        it { expect(configuration.database).to eq('mysql') }
+      end
+
+      context 'not allowed database' do
+        before { fake_configuration_file[:database] = 'awful database' }
+
+        it { expect { configuration.database }.to raise_error(SchedulerService::BuildConfiguration::BuildConfigurationError, 'Can\'t use awful database as custom database') }
+      end
+    end
+
     describe '#test_environment' do
       it { expect(configuration.test_environment).to eq('test') }
     end
@@ -33,6 +45,10 @@ describe SchedulerService::BuildConfiguration do
   context 'without configuration file' do
     describe '#requirements' do
       it { expect(configuration.requirements).to eq([]) }
+    end
+
+    describe '#database' do
+      it { expect(configuration.database).to eq('sqlite') }
     end
 
     describe '#spec_command' do
