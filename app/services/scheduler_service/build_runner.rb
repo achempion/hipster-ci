@@ -55,7 +55,7 @@ module SchedulerService
       `
 
       `rm #{ build_folder.join('config', 'database.yml') }`
-      `cp config/build_database.yml #{ build_folder.join('config', 'database.yml') }`
+      `cp config/build_databases/#{build_configuration.database}.yml #{ build_folder.join('config', 'database.yml') }`
 
       true
     end
@@ -74,7 +74,11 @@ module SchedulerService
     def run_specs
       spec_status =
         Bundler.with_clean_env do
-          system "cd #{build_folder} && RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} > spec_result 2>&1"
+          system <<-STRING
+            cd #{build_folder} &&
+            RAILS_ENV=#{build_configuration.test_environment} rake db:reset &&
+            RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} > spec_result 2>&1
+          STRING
         end
 
       @result = File.read build_folder.join('spec_result')

@@ -13,6 +13,8 @@ module SchedulerService
     #
     # spec_command: xvfb-run rspec
     #
+    # database: mysql
+    #
 
     def initialize build_folder
       @build_folder = build_folder
