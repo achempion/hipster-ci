@@ -10,7 +10,7 @@ module SchedulerService
 
       @result = ''
 
-      okay = prepare_files && prepare_libs && prepare_gems && run_specs
+      okay = check_requirements && prepare_files && prepare_libs && prepare_gems && run_specs
 
       @build.result = @result
 
@@ -43,6 +43,20 @@ module SchedulerService
       @result = File.read build_folder.join('apt_get_result')
 
       apt_get_status
+    end
+
+    def check_requirements
+      database_file = Rails.root.join("config/build_databases/#{build_configuration.database}.yml")
+
+      if database_file.exist?
+        true
+      else
+        @result = <<-STRING
+          Can't configure database because file #{database_file} does not exist
+        STRING
+
+        false
+      end
     end
 
     def prepare_files
