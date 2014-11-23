@@ -63,7 +63,13 @@ requirements:
   - curl
 
 spec_command: xvfb-run rspec
+
+database: mysql
   ```
+  
+`requirements` — libs that will be installed with `apt-get` command
+`spec_command` — command that replaced standart `rspec / spec` command
+ `database` — custom database for build, `sqlite` by default and available values is `sqlite` and `mysql`
 
 ### License
 
