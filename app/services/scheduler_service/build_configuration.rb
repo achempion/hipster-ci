@@ -37,13 +37,7 @@ module SchedulerService
     end
 
     def database
-      adapter = @configuration[:database] || 'sqlite'
-
-      if %w(sqlite mysql).include?(adapter)
-        adapter
-      else
-        raise BuildConfigurationError, "Can't use #{adapter} as custom database"
-      end
+      Database.new(@configuration[:database])
     end
 
     def test_environment
@@ -61,6 +55,5 @@ module SchedulerService
     end
 
     class BuildConfigurationError < StandardError; end
-
   end
 end

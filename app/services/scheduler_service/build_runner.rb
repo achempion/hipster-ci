@@ -46,9 +46,7 @@ module SchedulerService
     end
 
     def check_requirements
-      database_file = Rails.root.join("config/build_databases/#{build_configuration.database}.yml")
-
-      if database_file.exist?
+      if build_configuration.database.configuration_file.exist?
         true
       else
         @result = <<-STRING
@@ -69,7 +67,7 @@ module SchedulerService
       `
 
       `rm #{ build_folder.join('config', 'database.yml') }`
-      `cp config/build_databases/#{build_configuration.database}.yml #{ build_folder.join('config', 'database.yml') }`
+      `cp #{build_configuration.database.configuration_file} #{ build_folder.join('config', 'database.yml') }`
 
       true
     end

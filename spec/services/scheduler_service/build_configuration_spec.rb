@@ -27,13 +27,13 @@ describe SchedulerService::BuildConfiguration do
 
     describe '#database' do
       context 'allowed database' do
-        it { expect(configuration.database).to eq('mysql') }
+        it { expect(configuration.database.name).to eq('mysql') }
       end
 
       context 'not allowed database' do
         before { fake_configuration_file[:database] = 'awful database' }
 
-        it { expect { configuration.database }.to raise_error(SchedulerService::BuildConfiguration::BuildConfigurationError, 'Can\'t use awful database as custom database') }
+        it { expect { configuration.database.name }.to raise_error(SchedulerService::BuildConfiguration::BuildConfigurationError, 'Can\'t use awful database as custom database') }
       end
     end
 
@@ -48,7 +48,7 @@ describe SchedulerService::BuildConfiguration do
     end
 
     describe '#database' do
-      it { expect(configuration.database).to eq('sqlite') }
+      it { expect(configuration.database.name).to eq('sqlite') }
     end
 
     describe '#spec_command' do
