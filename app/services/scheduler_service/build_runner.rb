@@ -88,7 +88,7 @@ module SchedulerService
         Bundler.with_clean_env do
           system <<-STRING
             cd #{build_folder} &&
-            RAILS_ENV=#{build_configuration.test_environment} rake db:reset &&
+            RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result 2>&1 &&
             RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} > spec_result 2>&1
           STRING
         end
