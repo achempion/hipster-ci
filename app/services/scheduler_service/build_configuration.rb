@@ -13,6 +13,8 @@ module SchedulerService
     #
     # spec_command: xvfb-run rspec
     #
+    # database: mysql
+    #
 
     def initialize build_folder
       @build_folder = build_folder
@@ -34,6 +36,10 @@ module SchedulerService
       @configuration[:spec_command] || default_spec_command
     end
 
+    def database
+      Database.new(@configuration[:database])
+    end
+
     def test_environment
       'test'
     end
@@ -48,5 +54,6 @@ module SchedulerService
       end
     end
 
+    class BuildConfigurationError < StandardError; end
   end
 end

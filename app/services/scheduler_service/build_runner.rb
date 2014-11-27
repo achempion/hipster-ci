@@ -10,7 +10,7 @@ module SchedulerService
 
       @result = ''
 
-      okay = prepare_files && prepare_libs && prepare_gems && run_specs
+      okay = check_requirements && prepare_files && prepare_libs && prepare_gems && run_specs
 
       @build.result = @result
 
@@ -45,6 +45,18 @@ module SchedulerService
       apt_get_status
     end
 
+    def check_requirements
+      if build_configuration.database.configuration_file.exist?
+        true
+      else
+        @result = <<-STRING
+          Can't configure database because file #{database_file} does not exist
+        STRING
+
+        false
+      end
+    end
+
     def prepare_files
       `
           rm -rf #{build_folder} &&
@@ -55,7 +67,7 @@ module SchedulerService
       `
 
       `rm #{ build_folder.join('config', 'database.yml') }`
-      `cp config/build_database.yml #{ build_folder.join('config', 'database.yml') }`
+      `cp #{build_configuration.database.configuration_file} #{ build_folder.join('config', 'database.yml') }`
 
       true
     end
@@ -74,7 +86,11 @@ module SchedulerService
     def run_specs
       spec_status =
         Bundler.with_clean_env do
-          system "cd #{build_folder} && RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} > spec_result 2>&1"
+          system <<-STRING
+            cd #{build_folder} &&
+            RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result 2>&1 &&
+            RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} > spec_result 2>&1
+          STRING
         end
 
       @result = File.read build_folder.join('spec_result')
