@@ -208,6 +208,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
+    turbolinks (2.4.0)
+      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -234,3 +236,4 @@ DEPENDENCIES
   rails (~> 4.1)
   rspec-rails
   sqlite3
+  turbolinks
