@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.order(id: :desc)
+    @projects = Project.includes(:last_build).order(id: :desc)
   end
 
   def create
