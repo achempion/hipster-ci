@@ -3,7 +3,25 @@ html
   head
     title HipsterCi
     = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
     = csrf_meta_tags
+
+    javascript:
+      BuildFeedbackData = {
+        current_time: "#{Time.now}",
+        check_path: "#{builds_feedback_path}"
+      };
+    coffee:
+      $ ->
+        buildFeedback = ->
+          $.get(BuildFeedbackData.check_path, {from: BuildFeedbackData.current_time}).fail((data) ->
+            BuildFeedbackData.current_time = data.responseJSON.from
+            Turbolinks.visit(location.toString())
+          )
+
+        setInterval ->
+          buildFeedback()
+        , 5000
   body
     .base-page
       .base-page_header

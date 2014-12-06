@@ -5,6 +5,8 @@ gem 'rails', '~> 4.1'
 gem 'sqlite3'
 # gem 'mysql2' # libmysqlclient-dev
 
+gem 'turbolinks'
+
 gem 'evil-front-rails'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
