@@ -13,9 +13,11 @@
   
 ### Project configuration
 
-  at `/ config / application.rb`, option *default_project_access_token* paste your github access token
+  1. at `/ config / application.rb`, option *default_project_access_token* paste your github access token
   
-  next configure your login and password at `/ config / environments / production.rb`
+  2. configure your login and password at `/ config / environments / production.rb`
+  
+  3. define bash `SECRET_KEY_BASE` environment variable with result of `rake secret` command
   
 ### Running
 
