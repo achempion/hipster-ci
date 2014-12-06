@@ -1,5 +1,5 @@
 ## Hipster CI
-
+![Hipster CI](https://www.evernote.com/shard/s233/sh/a408c476-00d8-49bc-93a9-a02c4940586a/1af097048d96ee925b09e2df8abd3403/res/a51afa2c-905d-441c-84ac-07420ca67733/skitch.png)
 ### What this project do
 
   - provide web interface with your projects, builds (each commit is a build) and result of tests
