@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :builds, only: [:index, :show] do
     member { post 'restart' }
   end
+
+  resource :builds_feedback, only: :show
 end
