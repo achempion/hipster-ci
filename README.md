@@ -13,7 +13,7 @@
   
 ### Project configuration
 
-  1. at `/ config / application.rb`, option *default_project_access_token* paste your github access token
+  1. at `/ config / application.rb`, paste your github access token to `default_project_access_token` option
   
   2. configure your login and password at `/ config / environments / production.rb`
   
