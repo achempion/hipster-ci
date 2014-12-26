@@ -50,7 +50,7 @@ module SchedulerService
         true
       else
         @result = <<-STRING
-          Can't configure database because file #{database_file} does not exist
+          Can't configure database because file #{build_configuration.database.configuration_file} does not exist
         STRING
 
         false
