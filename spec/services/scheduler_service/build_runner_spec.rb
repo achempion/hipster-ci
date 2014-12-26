@@ -8,8 +8,8 @@ describe SchedulerService::BuildRunner do
 
     context 'with success status' do
       before do
-        expect(runner).to receive(:check_requirements).and_return(true)
         expect(runner).to receive(:prepare_files).and_return(true)
+        expect(runner).to receive(:check_requirements).and_return(true)
         expect(runner).to receive(:prepare_libs).and_return(true)
         expect(runner).to receive(:prepare_gems).and_return(true)
         expect(runner).to receive(:run_specs).and_return(true)
@@ -24,9 +24,9 @@ describe SchedulerService::BuildRunner do
 
     context 'with fail status' do
       before do
-        expect(runner).to receive(:check_requirements).and_return(false)
+        expect(runner).to receive(:prepare_files).and_return(false)
 
-        expect(runner).to_not receive(:prepare_files)
+        expect(runner).to_not receive(:check_requirements)
         expect(runner).to_not receive(:prepare_libs)
         expect(runner).to_not receive(:prepare_gems)
         expect(runner).to_not receive(:run_specs)
