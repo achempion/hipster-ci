@@ -84,18 +84,27 @@ module SchedulerService
     end
 
     def run_specs
-      spec_status =
-        Bundler.with_clean_env do
-          system <<-STRING
-            cd #{build_folder} &&
-            RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result 2>&1 &&
-            script -c "RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command}" -q /dev/null | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1
-          STRING
-        end
+      success_status_file = build_folder.join('spec_success')
+
+      success_status_file.delete if success_status_file.exist?
+
+      Bundler.with_clean_env do
+        system <<-STRING
+          cd #{build_folder} &&
+          RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result 2>&1 &&
+          script -c "RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} && touch spec_success" -q /dev/null | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1
+        STRING
+      end
 
       @result = File.read build_folder.join('spec_result')
 
-      spec_status
+      if success_status_file.exist?
+        success_status_file.delete
+
+        true
+      else
+        false
+      end
     end
 
     def notificate!
