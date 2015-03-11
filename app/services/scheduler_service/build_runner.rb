@@ -89,7 +89,7 @@ module SchedulerService
           system <<-STRING
             cd #{build_folder} &&
             RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result 2>&1 &&
-            RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} > spec_result 2>&1
+            script -c "RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command}" -q /dev/null | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1
           STRING
         end
 
