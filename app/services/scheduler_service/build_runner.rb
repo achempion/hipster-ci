@@ -98,13 +98,7 @@ module SchedulerService
 
       @result = File.read build_folder.join('spec_result')
 
-      if success_status_file.exist?
-        success_status_file.delete
-
-        true
-      else
-        false
-      end
+      success_status_file.exist?
     end
 
     def notificate!
