@@ -2,6 +2,7 @@
 
 ## Hipster CI
 ![Hipster CI](https://www.evernote.com/shard/s233/sh/a408c476-00d8-49bc-93a9-a02c4940586a/1af097048d96ee925b09e2df8abd3403/res/a51afa2c-905d-441c-84ac-07420ca67733/skitch.png)
+![Hipster CI](https://www.evernote.com/shard/s233/sh/9e0e5b55-63d4-4f6e-8f3d-53be5716bb9c/a99f1d028aa85ceb5cfcba3478cf32bf/res/f75b279d-7bd5-4d0a-b31f-f4bf6c2473f7/skitch.png)
 ### What this project do
 
   - simple CI server for ruby projects hosted on GitHub
