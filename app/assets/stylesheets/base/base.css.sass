@@ -31,12 +31,19 @@ a
 .base-page_header_logo
   font-family: 'Lobster', cursive
   font-size: 24px
-  i
-    width: 32px
-    height: 32px
-    padding: 15px
-    margin-right: 5px
-    font-size: 32px
-    transform: scale(1)
+  a
+    padding: 10px 15px 10px 12px
+    transition: background .2s
+    border-radius: 4px
+    color: black
+    display: inline-block
+    &:hover
+      background: black(0.01)
     &:active
-      transform: scale(0.9)
+      color: black
+      transform: translateY(1px)
+    i
+      width: 32px
+      height: 32px
+      margin-right: 15px
+      font-size: 32px
