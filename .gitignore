@@ -17,3 +17,6 @@
 .keep
 .DS_STORE
 /builds/
+
+config/build_databases/mysql.yml
+config/build_databases/sqlite.yml

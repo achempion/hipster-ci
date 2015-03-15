@@ -89,9 +89,11 @@ module SchedulerService
       success_status_file.delete if success_status_file.exist?
 
       Bundler.with_clean_env do
+        with_database = `rake -T`.include?("rake db:reset")
+
         system <<-STRING
           cd #{build_folder} &&
-          RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result 2>&1 &&
+          #{"RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result 2>&1 &&" if with_database}
           script -c "RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} && touch spec_success" -q /dev/null | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1
         STRING
       end
