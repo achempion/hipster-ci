@@ -89,7 +89,7 @@ module SchedulerService
       success_status_file.delete if success_status_file.exist?
 
       Bundler.with_clean_env do
-        with_database = `rake -T`.include?("rake db:reset")
+        with_database = `cd #{build_folder} && rake -T`.include?("rake db")
 
         system <<-STRING
           cd #{build_folder} &&
