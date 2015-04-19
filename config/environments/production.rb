@@ -80,7 +80,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  raise('Please, define HIPSTER_CI_LOGIN and HIPSTER_CI_PASSWORD bash variables') if ENV['HIPSTER_CI_LOGIN'].nil? || ENV['HIPSTER_CI_PASSWORD'].nil?
+
   config.middleware.insert_after(::Rack::Runtime, "::Rack::Auth::Basic", "Staging") do |login, password|
-    [login, password] == ['change', 'me']
+    [login, password] == [ENV['HIPSTER_CI_LOGIN'], ENV['HIPSTER_CI_PASSWORD']]
   end
 end
