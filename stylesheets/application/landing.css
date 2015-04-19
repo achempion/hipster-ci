@@ -1,15 +1,1 @@
-/* line 2, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/landing.sass */
-.landing-projects {
-  margin-bottom: 50px; }
-/* line 5, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/landing.sass */
-.landing-content-item {
-  margin-bottom: 50px; }
-  /* line 7, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/landing.sass */
-  .landing-content-item h1 {
-    font-size: 25px;
-    text-align: center;
-    margin-bottom: 25px; }
-    /* line 11, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/landing.sass */
-    .landing-content-item h1 span {
-      font-size: 15px;
-      display: block; }
+.landing-projects{margin-bottom:50px}.landing-content-item{margin-bottom:50px}.landing-content-item h1{font-size:25px;text-align:center;margin-bottom:25px}.landing-content-item h1 span{font-size:15px;display:block}

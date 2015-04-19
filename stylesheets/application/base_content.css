@@ -1,5 +1,1 @@
-/* line 1, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/base_content.sass */
-.base-page_content-body {
-  border-top: 2px solid green;
-  padding: 25px;
-  box-sizing: border-box; }
+.base-page_content-body{border-top:2px solid green;padding:25px;box-sizing:border-box}
