@@ -1,0 +1,7 @@
+/* line 1, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/code.sass */
+pre {
+  background: #f7f7f7;
+  line-height: 1.45;
+  padding: 15px 25px;
+  font-family: "Liberation Mono";
+  font-size: 14px; }

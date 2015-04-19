@@ -1,1 +1,27 @@
-hello world
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>The Middleman</title>
+    
+    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+  </head>
+  
+  <body class="index">
+    <div class="base-page"><div class="base-page_header"><div class="base-page_header_logo"><a href="/"><i class="fa fa-camera-retro"></i>Hipster Ci</a><div class="base-page_header_logo-info">— The best, free and casually simple CI server</div></div></div><div class="base-page_content"><div class="base-page_content-body"><div class="landing"><div class="landing-projects"><div class="project-item"><div class="project-item_right"><div class="build-label build-label-green">success</div><a class="project-item_remove" href="#"><i class="fa fa-trash"></i></a></div><span class="project-item_title"><a href="#">achempion/hipster-ci</a></span><span class="project-item_message">message of last commit</span></div><div class="project-item"><div class="project-item_right"><div class="build-label build-label-red">fail</div><a class="project-item_remove" href="#"><i class="fa fa-trash"></i></a></div><span class="project-item_title"><a href="#">achempion/project-2</a></span><span class="project-item_message">main feature</span></div><div class="project-item"><div class="project-item_right"><span class="build-item_spin-wrapper"><i class="fa fa-circle-o-notch fa-spin"></i></span><div class="build-label build-label-yellow">in progress</div><a class="project-item_remove" href="#"><i class="fa fa-trash"></i></a></div><span class="project-item_title"><a href="#">achempion/project-3</a></span><span class="project-item_message">fix errors</span></div></div><div class="landing-content"><div class="landing-content-item"><h1>How to use</h1><pre><code>$ export RAILS_ENV=production
+$ bundle
+$ rake db:schema:load
+$ rake assets:precompile
+$ rails s -p 80 &
+$ rake scheduler:perform &</code></pre></div><div class="landing-content-item"><h1>Environment</h1><pre><code>$ export DEFAULT_PROJECT_ACCESS_TOKEN=#your_github_token#
+$ export HIPSTER_CI_LOGIN=#your_login#
+$ export HIPSTER_CI_PASSWORD=#your_password#
+$ export SECRET_KEY_BASE=`rake secret`</code></pre></div><div class="landing-content-item"><h1>Github Webhook<span>Project > Settings > Webhooks & Services > Add webhook</span></h1><pre><code>http://#login#:#password#@#your_server_ip#/triggers/github</code></pre><br /><p>Example:</p><br /><pre><code>http://admin:secret@example.com/triggers/github</code></pre></div></div></div></div></div></div>
+  </body>
+</html>
