@@ -1,0 +1,21 @@
+/* line 1, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/project.sass */
+.project-item {
+  padding: 15px 0;
+  border-bottom: 2px dotted black(0.2); }
+
+/* line 4, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/project.sass */
+.project-item_right {
+  float: right; }
+
+/* line 6, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/project.sass */
+.project-item_remove {
+  margin-left: 8px; }
+
+/* line 8, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/project.sass */
+.project-item_message {
+  color: black(0.4);
+  font-style: italic; }
+
+/* line 11, /vagrant/opensource/hipster-ci-website/source/stylesheets/application/project.sass */
+.project-item_title {
+  margin-right: 12px; }
