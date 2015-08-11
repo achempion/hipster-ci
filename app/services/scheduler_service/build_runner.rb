@@ -34,6 +34,8 @@ module SchedulerService
     end
 
     def prepare_libs
+      return true if `which apt-get`.blank? # libs preparation require apt-get by design
+
       return true if build_configuration.requirements.empty?
 
       # todo: sudo is a bad idea
@@ -91,11 +93,22 @@ module SchedulerService
       Bundler.with_clean_env do
         with_database = `cd #{build_folder} && rake -T`.include?("rake db")
 
-        system <<-STRING
-          cd #{build_folder} &&
-          #{"RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result 2>&1 &&" if with_database}
-          script -c "RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} && touch spec_success" -q /dev/null | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1
-        STRING
+        exec_command = []
+        exec_command << "cd #{build_folder}"
+        exec_command << "RAILS_ENV=#{build_configuration.test_environment} rake db:reset | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1" if with_database
+
+        exec_command <<
+          if `echo $OSTYPE`.include? 'darwin' # mac os has a old 2004 version of "script" program
+            <<-STRING
+              (RAILS_ENV=#{build_configuration.test_environment} script -q /dev/null bundle exec #{build_configuration.spec_command} && touch spec_success) | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1
+            STRING
+          else
+            <<-STRING
+              script -c "RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} && touch spec_success" -q /dev/null | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1
+            STRING
+          end
+
+        system exec_command.join(' && ')
       end
 
       @result = File.read build_folder.join('spec_result')
