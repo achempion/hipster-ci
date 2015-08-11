@@ -8,7 +8,7 @@ describe 'check for updates' do
 
     it { expect(response.status).to eq(200) }
 
-    it { expect(response.body).to eq(' ') }
+    it { expect(response.body).to eq('') }
   end
 
   describe 'have new events' do

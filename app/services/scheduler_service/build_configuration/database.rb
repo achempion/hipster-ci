@@ -17,7 +17,7 @@ module SchedulerService
         database_name ||= 'sqlite'
 
         raise(BuildConfigurationError, "Can't use #{database_name} as custom database") \
-          unless %w(sqlite mysql).include?(database_name)
+          unless %w(sqlite mysql postgres).include?(database_name)
 
         database_name
       end

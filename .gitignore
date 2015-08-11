@@ -20,3 +20,4 @@
 
 config/build_databases/mysql.yml
 config/build_databases/sqlite.yml
+config/build_databases/postgres.yml
