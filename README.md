@@ -22,7 +22,7 @@ database: mysql
 
 `spec_command` — command that will replace default `rspec / spec` command
 
- `database` — custom database for build, `sqlite` by default and available values is `sqlite`, `mysql` and `postgres`
+`database` — custom database for build, `sqlite` by default and available values is `sqlite`, `mysql` and `postgres`
 
 ### License
 
