@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.1'
+gem 'thin'
 
 gem 'sqlite3'
 # gem 'mysql2' # libmysqlclient-dev
