@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20141021052209) do
 
-  create_table "builds", force: true do |t|
+  create_table "builds", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "status",     default: 0
     t.text     "result"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20141021052209) do
     t.text     "message"
   end
 
-  create_table "projects", force: true do |t|
+  create_table "projects", force: :cascade do |t|
     t.string  "path"
     t.string  "access_token"
     t.integer "notifications"
