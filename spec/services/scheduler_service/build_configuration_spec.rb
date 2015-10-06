@@ -22,7 +22,17 @@ describe SchedulerService::BuildConfiguration do
     end
 
     describe '#spec_command' do
-      it { expect(configuration.spec_command).to eq('xvfb-run rspec') }
+      context 'linux' do
+        before { allow_any_instance_of(described_class).to receive(:os_type).and_return('linux-gnu') }
+
+        it { expect(configuration.spec_command).to eq('xvfb-run rspec') }
+      end
+
+      context 'mac os' do
+        before { allow_any_instance_of(described_class).to receive(:os_type).and_return('darwin14') }
+
+        it { expect(configuration.spec_command).to eq('rspec') }
+      end
     end
 
     describe '#database' do

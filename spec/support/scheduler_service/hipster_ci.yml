@@ -6,3 +6,6 @@ requirements:
 spec_command: xvfb-run rspec
 
 database: mysql
+
+darwin14:
+  spec_command: rspec

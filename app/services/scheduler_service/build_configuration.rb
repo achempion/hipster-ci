@@ -15,17 +15,23 @@ module SchedulerService
     #
     # database: mysql
     #
+    # darwin14:
+    #   spec_command: rspec
+    #
 
     def initialize build_folder
       @build_folder = build_folder
 
       configuration_file = build_folder.join('config', 'hipster_ci.yml')
+
       @configuration =
         if configuration_file.exist?
-          YAML.load_file(build_folder.join('config', 'hipster_ci.yml')).with_indifferent_access
+          YAML.load_file(configuration_file).with_indifferent_access
         else
           {}
         end
+
+      @configuration.merge! @configuration[ os_type ] if @configuration.has_key? os_type
     end
 
     def requirements
@@ -38,6 +44,10 @@ module SchedulerService
 
     def database
       Database.new(@configuration[:database])
+    end
+
+    def os_type
+      @os_type ||= `echo $OSTYPE`.gsub! "\n", '' # expected: darwin14 (mac os), linux-gnu
     end
 
     def test_environment
