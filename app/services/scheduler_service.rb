@@ -59,7 +59,14 @@ module SchedulerService
   def process
     build = Build.scheduled.first
 
-    BuildRunner.new(build).process if build
+    return nil unless build
+
+    begin
+      BuildRunner.new(build).process
+    rescue => e
+      build.result = e.message + "<br><br>" + e.backtrace.join("<br>")
+      build.fail!
+    end
   end
 
 end
