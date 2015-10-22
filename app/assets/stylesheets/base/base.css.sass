@@ -26,24 +26,51 @@ a
   width: 900px
   margin: 0 auto
   margin-top: 40px
-.base-page_header
-  margin-bottom: 20px
-.base-page_header_logo
-  font-family: 'Lobster', cursive
-  font-size: 24px
-  a
-    padding: 10px 15px 10px 12px
-    transition: background .2s
-    border-radius: 4px
-    color: black
-    display: inline-block
-    &:hover
-      background: black(0.01)
-    &:active
-      color: black
-      transform: translateY(1px)
-    i
-      width: 32px
-      height: 32px
-      margin-right: 15px
-      font-size: 32px
+
+  &_header
+    margin-bottom: 20px
+    &_logo
+      font-family: 'Lobster', cursive
+      font-size: 24px
+      display: inline-block
+
+      a
+        padding: 10px 15px 10px 12px
+        transition: background .2s
+        border-radius: 4px
+        color: black
+        display: inline-block
+        &:hover
+          background: black(0.01)
+        &:active
+          color: black
+          transform: translateY(1px)
+        i
+          width: 32px
+          height: 32px
+          margin-right: 15px
+          font-size: 32px
+
+    &_scheduler
+      position: absolute
+      bottom: 0
+      right: 0
+      text-align: right
+
+      &_wrapper
+        float: right
+        height: 52px
+        width: 150px
+        position: relative
+
+      &_title
+        display: inline-block
+        line-height: 24px
+        margin-right: 53px
+        color: black(.4)
+
+      &_switcher
+        display: inline-block
+        position: absolute
+        bottom: 0
+        right: 0

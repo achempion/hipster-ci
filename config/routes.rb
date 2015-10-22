@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   end
 
   resource :builds_feedback, only: :show
+  resource :scheduler, only: [:create, :destroy]
 end

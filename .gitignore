@@ -17,6 +17,7 @@
 .keep
 .DS_STORE
 /builds/
+scheduler.pid
 
 config/build_databases/mysql.yml
 config/build_databases/sqlite.yml

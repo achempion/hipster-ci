@@ -1,0 +1,123 @@
+$base-font-size: 5px;
+
+$switch-width: 9em;
+$switch-size: 4.6em;
+$switch-space: .2em;
+
+$switch-off-padding: 0em;
+$switch-on-padding: $switch-size - $switch-space;
+$switch-button-size: $switch-size - ($switch-space*2);
+
+$switch-off-border: #eee;
+$switch-on-color: #00c169;
+$switch-toggle-color: #fff;
+
+$switch-animation-bounce-distance: .4em;
+
+input.switcher {
+  font-size: $base-font-size;
+  position: relative;
+  display: inline-block;
+  appearance: none;
+  width: $switch-width;
+  height: $switch-size;
+  line-height: $switch-size;
+  border-radius: $switch-size/2;
+  margin: 0;
+  padding: 0;
+  box-shadow: inset 0 0 0 $switch-space $switch-off-border;
+  outline: 1px solid transparent !important;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+
+  transition: box-shadow .3s ease-in-out, padding .25s ease-in-out;
+  transition-delay: .1s, 0s;
+
+  &:checked {
+    transition-delay: 0s, 0s;
+    box-shadow: inset 0 0 0 $switch-size/1.75 $switch-on-color !important;
+    padding-left: $switch-on-padding;
+  }
+  /* Animations if supported */
+  &.hit {
+    animation: slide-off .35s ease both;
+  }
+  &.hit:checked {
+    animation: slide-on .35s ease both .05s;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+  }
+
+  &::after {
+    /* Increases hit area */
+    $size-adjust: -($switch-button-size/3);
+    position: absolute;
+    top: $size-adjust;
+    left: $size-adjust;
+    bottom: $size-adjust;
+    right: $size-adjust;
+  }
+
+  &::before {
+    display: inline-block;
+    height: $switch-button-size;
+    width: $switch-button-size;
+    margin: $switch-space 0 0 $switch-space;
+    background-color: $switch-toggle-color;
+    border-radius: $switch-button-size/2;
+    box-shadow: 0 $switch-space ($switch-space*2) 0 rgba(0, 0, 0, .20),
+    0 0 ($switch-space/2) ($switch-space/2) rgba(0, 0, 0, .10);
+    transition: all .1s ease .1s;
+  }
+
+  &:active::before {
+    transition: all .1s ease .05s;
+  }
+  &.touch:hover::before {
+    transition: all .0s ease .00s;
+  }
+
+  &:active::before,
+  &.touch:hover::before {
+    width: $switch-button-size + ($switch-space*4);
+  }
+
+  &:active:checked::before,
+  &.touch:hover:checked::before {
+    margin-left: -($switch-space*3);
+  }
+}
+
+@keyframes slide-on {
+  0% {
+    padding-left: $switch-off-padding;
+  }
+  60% {
+    padding-left: $switch-on-padding + $switch-animation-bounce-distance;
+  }
+  100% {
+    padding-left: $switch-on-padding;
+  }
+}
+
+@keyframes slide-off {
+  0% {
+    padding-left: $switch-on-padding;
+    text-indent: 0;
+  }
+  60% {
+    padding-left: $switch-off-padding;
+    text-indent: -$switch-animation-bounce-distance;
+  }
+  100% {
+    padding-left: $switch-off-padding;
+    text-indent: 0;
+  }
+}

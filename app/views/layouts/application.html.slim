@@ -14,10 +14,9 @@ html
     coffee:
       $ ->
         buildFeedback = ->
-          $.get(BuildFeedbackData.check_path, {from: BuildFeedbackData.current_time}).fail((data) ->
+          $.get(BuildFeedbackData.check_path, {from: BuildFeedbackData.current_time}).fail (data) ->
             BuildFeedbackData.current_time = data.responseJSON.from
             Turbolinks.visit(location.toString())
-          )
 
         setInterval ->
           buildFeedback()
@@ -25,6 +24,12 @@ html
   body
     .base-page
       .base-page_header
+        .base-page_header_scheduler_wrapper
+          .base-page_header_scheduler
+            .base-page_header_scheduler_title Scheduler
+            .base-page_header_scheduler_switcher
+              input.switcher.js-scheduler-switcher type="checkbox" checked=SchedulerService.alive?
+            .clearfix
         .base-page_header_logo
           = link_to root_path do
             i.fa.fa-camera-retro
