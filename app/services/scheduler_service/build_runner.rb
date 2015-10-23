@@ -60,13 +60,13 @@ module SchedulerService
     end
 
     def prepare_files
-      # `
-      #     rm -rf #{build_folder} &&
-      #     mkdir -p #{build_folder} &&
-      #     cd #{build_folder} &&
-      #     git clone https://#{@build.project.access_token}@github.com/#{@build.project.path} . &&
-      #     git checkout #{@build.sha}
-      # `
+      `
+          rm -rf #{build_folder} &&
+          mkdir -p #{build_folder} &&
+          cd #{build_folder} &&
+          git clone https://#{@build.project.access_token}@github.com/#{@build.project.path} . &&
+          git checkout #{@build.sha}
+      `
 
       `rm #{ build_folder.join('config', 'database.yml') }`
       `cp #{build_configuration.database.configuration_file} #{ build_folder.join('config', 'database.yml') }`
