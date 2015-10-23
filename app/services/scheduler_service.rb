@@ -5,10 +5,11 @@ module SchedulerService
   def run!
     return false if alive?
 
-    self.pid =
-      Process.fork do
-        loop { process; sleep 5 }
-      end
+    pid = Process.spawn('rake scheduler:perform')
+
+    Process.detach(pid)
+
+    self.pid = pid
   end
 
   def stop!
@@ -26,6 +27,19 @@ module SchedulerService
       true
     rescue Errno::ESRCH
       false
+    end
+  end
+
+  def process
+    build = Build.scheduled.first
+
+    return nil unless build
+
+    begin
+      BuildRunner.new(build).process
+    rescue => e
+      build.result = e.message + "<br><br>" + e.backtrace.join("<br>")
+      build.fail!
     end
   end
 
@@ -54,19 +68,6 @@ module SchedulerService
   def pid_file_storage
     file = Rails.root.join('scheduler.pid')
 
-  end
-
-  def process
-    build = Build.scheduled.first
-
-    return nil unless build
-
-    begin
-      BuildRunner.new(build).process
-    rescue => e
-      build.result = e.message + "<br><br>" + e.backtrace.join("<br>")
-      build.fail!
-    end
   end
 
 end
