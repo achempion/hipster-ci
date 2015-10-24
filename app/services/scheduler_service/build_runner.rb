@@ -95,26 +95,32 @@ module SchedulerService
 
         exec_command = []
         exec_command << "cd #{build_folder}"
-        exec_command << "RAILS_ENV=#{build_configuration.test_environment} rake db:reset | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result_raw 2>&1" if with_database
+        exec_command << "RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result_raw 2>&1" if with_database
 
         exec_command <<
           if `echo $OSTYPE`.include? 'darwin' # mac os has a old 2004 version of "script" program
             <<-STRING
-              (RAILS_ENV=#{build_configuration.test_environment} script -q /dev/null bundle exec #{build_configuration.spec_command} && touch spec_success) > spec_result_raw 2>&1
+              (RAILS_ENV=#{build_configuration.test_environment} script -q /dev/null bundle exec #{build_configuration.spec_command} && touch spec_success; touch spec_done) > spec_result_raw 2>&1
             STRING
           else
             <<-STRING
-              script -c "RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} && touch spec_success" -q /dev/null > spec_result_raw 2>&1
+              script -c "RAILS_ENV=#{build_configuration.test_environment} bundle exec #{build_configuration.spec_command} && touch spec_success; touch spec_done" -q /dev/null > spec_result_raw 2>&1
             STRING
           end
 
         system exec_command.join(' && ')
       end
 
-      `cd #{build_folder} && cat spec_result_raw | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1`
-      `rm #{build_folder.join('spec_result_raw')}`
+      is_spec_done = build_folder.join('spec_done') # workaround for "script" command becomes async without tty
+      loop do
+        break if is_spec_done.exist?
 
-      @result = File.read build_folder.join('spec_result')
+        sleep 5
+      end
+
+      `cd #{build_folder} && cat spec_result_raw | #{Rails.root.join('vendor/shell/convert.sh')} > spec_result 2>&1`
+
+      @result = build_folder.join('spec_result').read
 
       success_status_file.exist?
     end
