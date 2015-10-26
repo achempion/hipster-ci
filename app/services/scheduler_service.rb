@@ -16,6 +16,11 @@ module SchedulerService
     return true unless alive?
 
     Process.kill 9, pid
+
+    Build.in_progress.each do |build|
+      build.result = 'halted by stopping scheduler'
+      build.fail!
+    end
   end
 
   def alive?
