@@ -12,4 +12,12 @@ module ApplicationHelper
     build.in_progress? ? spinner + status : status
   end
 
+  # duration: seconds
+  def build_duration duration
+    minutes = duration / 60
+    seconds = duration - minutes * 60
+
+    "#{pluralize minutes, 'minute' if minutes > 0} #{pluralize seconds, 'second'}"
+  end
+
 end

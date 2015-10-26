@@ -8,6 +8,9 @@
   = link_to build_path(build.id), class: 'build-item_sha' do
     = build.sha[0..6]
   span.build-item_message= truncate build.message, length: 64
+  - if build.duration?
+    span.build-item_duration<
+      = "— #{build_duration build.duration}"
   - if params[:controller] == 'builds' && params[:action] == 'index'
     .build-item_project= link_to build.project.path, project_path(build.project)
 

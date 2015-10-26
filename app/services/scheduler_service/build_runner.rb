@@ -10,9 +10,17 @@ module SchedulerService
 
       @result = ''
 
-      okay = prepare_files && check_requirements && prepare_libs && prepare_gems && run_specs
+      preparation = prepare_files && check_requirements && prepare_libs && prepare_gems
+
+      okay = preparation
+      spec_start_time = nil
+      if preparation
+        spec_start_time = Time.now
+        okay = run_specs
+      end
 
       @build.result = @result
+      @build.duration = Time.now - spec_start_time if spec_start_time
 
       if okay
         @build.success!

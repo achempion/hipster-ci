@@ -11,21 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021052209) do
+ActiveRecord::Schema.define(version: 20151026044421) do
 
   create_table "builds", force: :cascade do |t|
     t.integer  "project_id"
-    t.integer  "status",     default: 0
+    t.integer  "status",                 default: 0
     t.text     "result"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sha"
+    t.string   "sha",        limit: 255
     t.text     "message"
+    t.integer  "duration"
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string  "path"
-    t.string  "access_token"
+    t.string  "path",          limit: 255
+    t.string  "access_token",  limit: 255
     t.integer "notifications"
   end
 
