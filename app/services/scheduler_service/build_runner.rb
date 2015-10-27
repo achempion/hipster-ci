@@ -99,10 +99,13 @@ module SchedulerService
       success_status_file.delete if success_status_file.exist?
 
       Bundler.with_clean_env do
-        with_database = `cd #{build_folder} && rake -T`.include?("rake db")
+        rake_commands = `cd #{build_folder} && rake -T`
+
+        with_database = rake_commands.include?("rake db")
 
         exec_command = []
         exec_command << "cd #{build_folder}"
+        exec_command << "rake tmp:create" if rake_commands.include?("rake tmp:create")
         exec_command << "RAILS_ENV=#{build_configuration.test_environment} rake db:reset > spec_result_raw 2>&1" if with_database
 
         exec_command <<
